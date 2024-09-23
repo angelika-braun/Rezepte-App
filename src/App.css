@@ -1,6 +1,151 @@
-*{
+* {
   text-align: center;
   padding: 0;
   margin: 0;
 }
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "Croissant One";
+  font-style: normal;
+  font-weight: 400;
+  src: url("/croissant-one-v26-latin-regular.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
 
+body {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+  background-image: url(../public/tomatoes.png);
+  background-size: auto;
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-color: green;
+}
+.card {
+  font-family: "Croissant One";
+  width: 300px;
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 20px;
+  margin: 20px;
+  background-color: rgba(245, 245, 245, 0.438);
+  box-shadow: 0 0 15px 0 grey;
+}
+.category {
+  display: none;
+}
+.recipe-img {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 20px;
+  box-shadow: 0 0 25px 20px white;
+}
+iframe {
+  width: 100%;
+  height: 300px;
+  margin-bottom: 20px;
+}
+h1 {
+  color: goldenrod;
+  margin: 10px 0;
+}
+
+ul,
+h3,
+h2,
+p {
+  margin: 20px;
+}
+.ingredients {
+  text-align: left;
+}
+
+.instructions {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+li {
+  font-size: smaller;
+  list-style: none;
+}
+
+.breadMoreBtntn {
+  transition: all 0.3s ease-in-out;
+}
+
+.readMoreBtn {
+  width: 200px;
+  height: 60px;
+  border-radius: 50px;
+  background-image: linear-gradient(135deg, #ccff33 0%, #004b23 100%);
+  box-shadow: 0 20px 30px -6px rgba(238, 103, 97, 0.5);
+  outline: none;
+  cursor: pointer;
+  border: none;
+  font-size: 24px;
+  color: white;
+  padding: 10px;
+  margin: 20px;
+}
+
+.readMoreBtn:hover {
+  transform: translateY(3px);
+  box-shadow: none;
+}
+
+.readMoreBtn:active {
+  opacity: 0.5;
+}
+
+@media only screen and (min-width: 800px) {
+  .card {
+    animation: myAnim 6s ease 0s 1 normal backwards;
+  }
+  @keyframes myAnim {
+    0% {
+      animation-timing-function: ease-in;
+      opacity: 0;
+      transform: translateX(-800px);
+    }
+
+    38% {
+      animation-timing-function: ease-out;
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    55% {
+      animation-timing-function: ease-in;
+      transform: translateX(-68px);
+    }
+
+    72% {
+      animation-timing-function: ease-out;
+      transform: translateX(0);
+    }
+
+    81% {
+      animation-timing-function: ease-in;
+      transform: translateX(-28px);
+    }
+
+    90% {
+      animation-timing-function: ease-out;
+      transform: translateX(0);
+    }
+
+    95% {
+      animation-timing-function: ease-in;
+      transform: translateX(-8px);
+    }
+
+    100% {
+      animation-timing-function: ease-out;
+      transform: translateX(0);
+    }
+  }
+}
