@@ -1,34 +1,39 @@
-import { useState } from 'react';
-import { APIContext } from './APIContext'
-import './App.css'
-import Home from './components/Home'
-import Header from './components/Header';
-import { Route, Routes } from 'react-router-dom';
-import CategorySearch from './components/CategorySearch';
+import { useState } from "react";
+import { APIContext } from "./APIContext";
+import "./App.css";
+import Home from "./components/Home";
+import { Route, Routes } from "react-router-dom";
+import Recipe from "./components/Recipe";
+import Layout from "./components/Layout";
+import CategorySearch from "./components/CategorySearch";
 
 function App() {
-  const API_URL = 'https://www.themealdb.com/api/json/v1/1/';
   const [recipes, setRecipes] = useState([]);
   const [error, setError] = useState(null);
   const [image, setImage] = useState(null);
   const [showDetails, setShowDetails] = useState(false);
 
- 
-
   return (
-    <>
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path='/categories' element={<CategorySearch />} />
-    </Routes>
-    <APIContext.Provider value={{API_URL, showDetails, setShowDetails, image, setImage, recipes, setRecipes, error, setError }}>
-     
-
-    <Header />
-    <Home  />
-    </APIContext.Provider> 
-    </>
- )
+    <APIContext.Provider
+      value={{
+        showDetails,
+        setShowDetails,
+        image,
+        setImage,
+        recipes,
+        setRecipes,
+        error,
+        setError,
+      }}>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="category" element={<CategorySearch />} />
+          <Route path="/recipe" element={<Recipe />} />
+        </Route>
+      </Routes>
+    </APIContext.Provider>
+  );
 }
 
-export default App
+export default App;

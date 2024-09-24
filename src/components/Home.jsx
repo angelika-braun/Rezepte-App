@@ -1,27 +1,24 @@
-// Startseite laut Katharina
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useEffect } from "react";
 import { APIContext } from "../APIContext";
 import "../App.css";
 
 const Home = () => {
   const {
-    API_URL,
     showDetails,
     setShowDetails,
     recipes,
-    setRecipes,
-    error,
-    setError,
+    setRecipes
   } = useContext(APIContext);
+  const [error , setError] = useState(null);
 
   useEffect(() => {
-    fetch(`${API_URL}random.php`)
+    fetch(`https://www.themealdb.com/api/json/v1/1/random.php`)
       .then((response) => {
         if (response.ok) {
           return response.json();
         } else {
-          throw new Error("Die Anfrage war nicht in Ordnung");
+          throw new Error("The request was not correct");
         }
       })
       .then((data) => {
@@ -98,7 +95,7 @@ const Home = () => {
                 />
               ) : (
                 <p style={{ color: "red", margin: "20px" }}>
-                  Es ist kein Video verfügbar
+                There is no video available
                 </p>
               )}
             </div>

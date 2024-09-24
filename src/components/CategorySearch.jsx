@@ -1,9 +1,8 @@
-import { useContext, useEffect, useState } from "react";
-import { APIContext } from "../APIContext";
+import { useEffect, useState } from "react";
 import "./CategorySearch.css"
 
 const CategorySearch = () => {
-      const { API_URL, error, setError } = useContext(APIContext)
+      const [error, setError] = useState(null);
       const [categories, setCategories] = useState([]);
       const [searchTerm, setSearchTerm] = useState('');
       const [filteredCategories, setFilteredCategories] = useState([]);
@@ -12,7 +11,7 @@ const CategorySearch = () => {
     
        
         useEffect(() => {
-          fetch(`${API_URL}categories.php`)
+          fetch('https://www.themealdb.com/api/json/v1/1/categories.php')
             .then((response) => response.json())
             .then((data) => {
               setCategories(data.categories);
@@ -23,6 +22,7 @@ const CategorySearch = () => {
             });
         }, []);
       
+        // Funktion zum Filtern der Kategorien basierend auf dem Suchbegriff
         const handleSearch = (e) => {
           const value = e.target.value.toLowerCase();
           setSearchTerm(value);
@@ -33,7 +33,7 @@ const CategorySearch = () => {
         };
           const fetchMealsByCategory = (category) => {
           setSelectedCategory(category);
-          fetch(`${API_URL}filter.php?c=${category}`)
+          fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`)
             .then((response) => response.json())
             .then((data) => {
               setMeals(data.meals); 
@@ -54,15 +54,15 @@ const CategorySearch = () => {
               type="text" 
               value={searchTerm} 
               onChange={handleSearch} 
-              placeholder="Search for Categorien..." 
+              placeholder="Suche nach Kategorien..." 
               className="search-input"
             />
             <ul className="category-list">
               {filteredCategories.map((category) => (
                 <li 
                   key={category.idCategory} 
-                  onClick={() => fetchMealsByCategory(category.strCategory)} // Klick auf Kategorie
-                  style={{ cursor: 'pointer', color: selectedCategory === category.strCategory ? 'blue' : 'black' }} // Markiere ausgewählte Kategorie
+                  onClick={() => fetchMealsByCategory(category.strCategory)} 
+                  style={{ cursor: 'pointer', color: selectedCategory === category.strCategory ? 'green' : 'black' }} // Markiere ausgewählte Kategorie
                 >
                   {category.strCategory}
                 </li>
@@ -71,7 +71,7 @@ const CategorySearch = () => {
       
             {meals.length > 0 && (
               <div className="meals-list">
-                <h3>Rezepte in der Kategorie: {selectedCategory}</h3>
+                <h2>Rezepte in der Kategorie: {selectedCategory}</h2>
                 <ul>
                   {meals.map((meal) => (
                     <li key={meal.idMeal}>

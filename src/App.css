@@ -4,7 +4,7 @@
   margin: 0;
 }
 @font-face {
-  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-display: swap;
   font-family: "Croissant One";
   font-style: normal;
   font-weight: 400;
@@ -27,9 +27,14 @@ body {
  .dark-mode{
   background-image: url(../tomatoes-1984285_1920.png);
   background-position: center top;
-
   background-color: #031b0e;
-  color: white;
+  color: whitesmoke;
+}
+
+a{
+  color: green;
+  cursor: pointer;
+  margin: 20px;
 }
 
 .card {
