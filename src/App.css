@@ -11,17 +11,27 @@
   src: url("/croissant-one-v26-latin-regular.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
+
 body {
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  flex-wrap: wrap;
   align-items: center;
-  background-image: url(../public/tomatoes.png);
+  background-image: url(../tomatoes-1984285_1920.png);
+  background-position: center top;
+
   background-size: auto;
   background-position: center top;
   background-repeat: no-repeat;
-  background-color: green;
 }
+ .dark-mode{
+  background-image: url(../tomatoes-1984285_1920.png);
+  background-position: center top;
+
+  background-color: #031b0e;
+  color: white;
+}
+
 .card {
   font-family: "Croissant One";
   width: 300px;
@@ -89,7 +99,7 @@ li {
   font-size: 24px;
   color: white;
   padding: 10px;
-  margin: 20px;
+  margin: 10px;
 }
 
 .readMoreBtn:hover {
@@ -102,6 +112,7 @@ li {
 }
 
 @media only screen and (min-width: 800px) {
+
   .card {
     animation: myAnim 6s ease 0s 1 normal backwards;
   }
