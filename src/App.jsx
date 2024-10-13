@@ -3,9 +3,10 @@ import { APIContext } from "./APIContext";
 import "./App.css";
 import Home from "./components/Home";
 import { Route, Routes } from "react-router-dom";
-import Recipe from "./components/Recipe";
 import Layout from "./components/Layout";
 import CategorySearch from "./components/CategorySearch";
+import CategoryMealDetails from "./components/CategoryMealDetails";
+import ContactUs from "./components/ContactUs";
 
 function App() {
   const [recipes, setRecipes] = useState([]);
@@ -29,8 +30,10 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="category" element={<CategorySearch />} />
-          <Route path="/recipe" element={<Recipe />} />
+          <Route path="meal/:id" element={<CategoryMealDetails />} />
+          <Route path="/contact" element={<ContactUs />} />
         </Route>
+        
       </Routes>
     </APIContext.Provider>
   );

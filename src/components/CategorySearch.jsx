@@ -1,14 +1,21 @@
 import { useEffect, useState } from "react";
 import "./CategorySearch.css"
+import { useNavigate } from "react-router-dom";
 
 const CategorySearch = () => {
       const [error, setError] = useState(null);
       const [categories, setCategories] = useState([]);
       const [searchTerm, setSearchTerm] = useState('');
       const [filteredCategories, setFilteredCategories] = useState([]);
-      const [meals, setMeals] = useState([]); // Zustand für die Rezepte
-      const [selectedCategory, setSelectedCategory] = useState(''); // Ausgewählte Kategorie
-    
+      const [meals, setMeals] = useState([]); 
+      const [selectedCategory, setSelectedCategory] = useState(''); 
+      
+      const navigate = useNavigate();
+
+      const handleShowRecipe = (mealId) => {
+        console.log("Navigating to meal ID:", mealId); 
+        navigate(`/meal/${mealId}`);
+      };      
        
         useEffect(() => {
           fetch('https://www.themealdb.com/api/json/v1/1/categories.php')
@@ -18,11 +25,10 @@ const CategorySearch = () => {
               setFilteredCategories(data.categories);
             })
             .catch((error) => {
-              console.error('Fehler beim Abrufen der Kategorien:', error);
+              console.error('Error when fetching the categories ', error);
             });
         }, []);
       
-        // Funktion zum Filtern der Kategorien basierend auf dem Suchbegriff
         const handleSearch = (e) => {
           const value = e.target.value.toLowerCase();
           setSearchTerm(value);
@@ -36,10 +42,11 @@ const CategorySearch = () => {
           fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`)
             .then((response) => response.json())
             .then((data) => {
+              console.log(data);
               setMeals(data.meals); 
             })
             .catch((error) => {
-              console.error('Fehler beim Abrufen der Rezepte:', error);
+              console.error('Request error:', error);
               setError(`Error: ${error.message}`);
             });
         };
@@ -54,7 +61,7 @@ const CategorySearch = () => {
               type="text" 
               value={searchTerm} 
               onChange={handleSearch} 
-              placeholder="Suche nach Kategorien..." 
+              placeholder="Search for categories..." 
               className="search-input"
             />
             <ul className="category-list">
@@ -62,7 +69,7 @@ const CategorySearch = () => {
                 <li 
                   key={category.idCategory} 
                   onClick={() => fetchMealsByCategory(category.strCategory)} 
-                  style={{ cursor: 'pointer', color: selectedCategory === category.strCategory ? 'green' : 'black' }} // Markiere ausgewählte Kategorie
+                  style={{ cursor: 'pointer', color: selectedCategory === category.strCategory ? 'green' : 'black' }} 
                 >
                   {category.strCategory}
                 </li>
@@ -71,12 +78,13 @@ const CategorySearch = () => {
       
             {meals.length > 0 && (
               <div className="meals-list">
-                <h2>Rezepte in der Kategorie: {selectedCategory}</h2>
+                <h2>Recipes in the category: {selectedCategory}</h2>
                 <ul>
                   {meals.map((meal) => (
                     <li key={meal.idMeal}>
                       <img src={meal.strMealThumb} alt={meal.strMeal} width="100" />
                       <p>{meal.strMeal}</p>
+                      <button className="detailButton" onClick={() => handleShowRecipe(meal.idMeal)}>Show recipe</button>
                     </li>
                   ))}
                 </ul>

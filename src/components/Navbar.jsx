@@ -5,7 +5,7 @@ export default function Navbar() {
         <nav className="navbar">
           <NavLink to="/" end>Home</NavLink>
           <NavLink to="/category">Food-Category-Search</NavLink> 
-          <NavLink to="/contact">Kontakt</NavLink>
+          <NavLink to="/contact">Contact</NavLink>
         </nav>
       );
     }

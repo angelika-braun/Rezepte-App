@@ -1,0 +1,43 @@
+.contactContainer {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: 320px;
+    }
+    .contactContainer form {
+    font-size: 14px;
+    font-family: "Croissant One";
+    width: 300px;
+    backdrop-filter: blur(16px);
+    border-radius: 20px;
+    padding: 2px;
+    margin: 3px;
+    background-color: rgba(245, 245, 245, 0.603);
+    box-shadow: 0 0 15px 0 grey;
+    cursor: pointer;
+    }
+    .contactContainer form:hover {
+    transform: translateY(-0.3rem);
+    transition: transform 0.5s; 
+    background-color: rgba(245, 245, 245, 0.87);
+    }
+
+    .labelbox {
+      display: flex;
+      justify-content: space-between;
+
+    }
+
+    input, label, textarea  {
+      margin: 10px;
+      padding: 5px;
+      border-radius: 10px;
+}
+button {
+      margin: 10px;
+      padding: 5px;
+      border-radius: 10px;
+      background-color: green;
+      color: white;
+      font-weight: bold;
+}
